@@ -1,6 +1,15 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
 body, p, h1, ul, li, blockquote {
     padding: 0px;
-    margin: 8px;
+}
+blockquote cite {
+    color: whitesmoke;
+
 }
 
 body{
@@ -16,7 +25,9 @@ a {
 }
 
 img {
-    max-width: 100px;
+    display: block;
+    max-width: 100%;
+    border-radius: 5px;
 }
 
 /*
@@ -32,6 +43,32 @@ img {
         "footer footer footer";
 }
 
+@media (max-width: 1200px){
+    .estrutura {
+
+        grid-template-areas:
+            "header header header"
+            "sidenav content content"
+            "sidenav anuncios anuncios"
+            "footer footer footer";
+    }
+    
+}
+
+@media (max-width: 760px){
+    .estrutura{
+        grid-template-columns: 100%;
+        grid-template-areas:
+        "header"
+        "sidenav"
+        "content"
+        "anuncios"
+        "footer"
+        ;
+    }
+}
+
+
 
 .header {
     display: grid;
@@ -40,16 +77,30 @@ img {
     padding: 30px;
     grid-template-columns: 1fr auto;
     align-items: center;
-    justify-content: space-evenly;
 }
+
+@media (max-width: 960px) {
+    .header{
+        grid-template-columns: auto;
+    }
+    .logo{
+        margin-bottom: 20px;
+    }
+    .header nav a{
+        font-size: 1em;
+    }
+}
+
 .logo{
     max-width: 200px;
+    min-width: 100px;
 }
 
 .header nav ul {
     display: flex;
     flex-wrap: wrap;
 }
+
 .header nav a {
     display: block;
     padding: 10px;
@@ -64,17 +115,232 @@ img {
     background: rgba(0, 0, 0, .5);
 }
 
+.header li + li {
+    margin-left: 30px;
+}
+
 .content{
     grid-area: content;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
 }
+@media (max-width: 600px){
+    .content{
+        grid-template-columns: auto;
+    }
+}
+/* Sidenav */
 
 .sidenav{
     grid-area: sidenav;
-}
-.anuncios{
-    grid-area: anuncios;
+    background: #fafbfc;
+    padding: 30px;
 }
 
+.sidenav li a {
+    display: block;
+    min-width: 60px;
+    max-width: 100px;
+    margin: 0 auto 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44,44, 0.20);
+    transition: .2s ease-in-out;
+}
+.sidenav li a:hover{
+    background: #B07DFB;
+    
+}
+
+@media (max-width: 760px ) {
+    /*Cria a barra de scroll especifica para essa div*/
+    /*ms e webkit para permitir que mantenha a funcionalidade
+      no safari/iphone/ipad e windows
+    */
+    .sidenav{
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+
+    .sidenav::after {
+        font-size: 25px;
+        content: '→';
+        position: absolute;
+        top: 5px;
+        right: 30px;
+        color: rgba(0, 0, 0, .6);
+        animation: seta .5s ease-in 0s infinite alternate;
+        
+    }
+
+    @keyframes seta {
+        from {
+            right: 30px;
+        }
+        to{
+            right: 20px;
+        }
+    }
+
+    .sidenav ul li {
+        display: flex;
+        flex-direction: row;
+
+    }
+    .sidenav ul li {
+        flex: 1 0 60px;
+    }
+    .sidenav {
+        padding: 0 30px;
+    }
+    .sidenav li a {
+        margin: 30px 30px 30px 0;
+    }
+}
+
+
+/* Content*/
+p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    letter-spacing: -0.05em;
+    color: rgba(0, 0, 0, 0.8)
+}
+/* Para todo P que vem após outro P*/
+.informacoes p + p {
+    margin-top: 30px;
+}
+.col-wide {
+    grid-column: 1 / -1;
+}
+
+.imagem-1{
+    grid-row: span 2;
+    align-self: end;
+}
+.imagem-2{
+    align-self: end;
+}
+/* Titulo */
+
+.titulo{
+    color: #B07DFB;
+}
+
+.titulo h1{
+    font-size: 3.75em;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.titulo span {
+    font-size: 0.875em;
+    font-style: italic;
+}
+
+/* Anuncios */
+.anuncios{
+    display: grid;
+    grid-area: anuncios;
+    background: #fafbfc;
+    align-content: start;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+}
+
+/* Caracteristicas */
+
+.caracteristicas {
+    display: flex;
+    align-items: flex-start;
+
+}
+
+/*Apenas as divs dentro da classe caracteristicas*/
+.caracteristicas > div {
+    width: 80px;
+    text-align: center;
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.20);
+    position: relative;
+}
+
+.caracteristicas > div:first-child{
+    margin-right: 30px;
+
+}
+
+.caracteristicas span {
+    display: block;
+    color: #B07DFB;
+}
+
+.numero {
+    color: #B07DFB;
+    font-size: 3em;
+    line-height: 1;
+    margin: 10px auto;
+}
+
+.rotulo{
+    position: relative;
+    background: white;
+    border-radius: 0 0 5px 5px;
+    padding: 5px 0;
+    top: 2px;
+}
+
+.destaque{
+    font-size: 0.875em;
+    color: #B07DFB;
+    max-width: 16em;
+}
+
+.citacao, .atributos {
+    align-self: start;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
+    background: linear-gradient(135deg, #8844ee, #b07dfb);
+}
+
+.citacao P {
+    font-size: 1.5em;
+    font-style: italic;
+    text-align: center;
+    max-width: 500px;
+    color: white;
+    margin: 0 auto;
+
+}
+
+.atributos li{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.125em;
+    padding: 15px;
+}
+
+.atributos li + li {
+    border-top: 2px solid #b07dfb;
+}
+
+/* Footer */
 .footer{
     grid-area: footer;
+    background: linear-gradient(135deg, #8844ee, #B07DFB);
+}
+.footer p {
+    color: white;
+    text-align: center;
+    padding: 30px;
 }
